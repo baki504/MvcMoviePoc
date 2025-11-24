@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MvcMovie.Controllers;
+namespace MvcMoviePoc.Controllers;
 
 public class HelloWorldController : Controller
 {

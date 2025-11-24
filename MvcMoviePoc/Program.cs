@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
 using MvcMoviePoc.Data;
+using MvcMoviePoc.Models; // ó·: SeedData ÉNÉâÉXÇ™ MvcMoviePoc.Models Ç…Ç†ÇÈèÍçá
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MvcMoviePocContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MvcMoviePocContext") ?? throw new InvalidOperationException("Connection string 'MvcMoviePocContext' not found.")));

@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
 using MvcMoviePoc.Data;
+using MvcMoviePoc.Models;
 
 namespace MvcMoviePoc.Controllers
 {
-    public class MoviesController : Controller
+    public class MoviesController(MvcMoviePocContext context) : Controller
     {
-        private readonly MvcMoviePocContext _context;
-
-        public MoviesController(MvcMoviePocContext context)
-        {
-            _context = context;
-        }
+        private readonly MvcMoviePocContext _context = context;
 
         // GET: Movies
         // GET: Movies
@@ -51,7 +46,7 @@ namespace MvcMoviePoc.Controllers
         }
 
         [HttpPost]
-        public string Index(string searchString, bool notUsed)
+        public string Index(string searchString)
         {
             return "From [HttpPost]Index: filter on " + searchString;
         }

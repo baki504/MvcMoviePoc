@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MvcMoviePoc.Data
 {
-    public class MvcMoviePocContext : DbContext
+    public class MvcMoviePocContext(DbContextOptions<MvcMoviePocContext> options) : DbContext(options)
     {
-        public MvcMoviePocContext (DbContextOptions<MvcMoviePocContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<MvcMovie.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<MvcMoviePoc.Models.Movie> Movie { get; set; } = default!;
     }
 }

@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/ソリューション項目/" />
+  <Project Path="MvcMoviePoc/MvcMoviePoc.csproj" />
+</Solution>

@@ -54,6 +54,11 @@ namespace MvcMoviePoc.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -94,6 +99,11 @@ namespace MvcMoviePoc.Controllers
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -145,12 +155,18 @@ namespace MvcMoviePoc.Controllers
         // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
             var movie = await _context.Movie
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
@@ -165,6 +181,11 @@ namespace MvcMoviePoc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var movie = await _context.Movie.FindAsync(id);
             if (movie != null)
             {

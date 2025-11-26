@@ -3,5 +3,6 @@
     <File Path=".editorconfig" />
   </Folder>
   <Folder Name="/ソリューション項目/" />
+  <Project Path="MvcMoviePoc.Tests/MvcMoviePoc.Tests.csproj" Id="50496e7a-40be-46af-a1fd-4b96d83adc03" />
   <Project Path="MvcMoviePoc/MvcMoviePoc.csproj" />
 </Solution>

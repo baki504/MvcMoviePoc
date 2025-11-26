@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMoviePoc.Data;
 
@@ -11,9 +12,11 @@ using MvcMoviePoc.Data;
 namespace MvcMoviePoc.Migrations
 {
     [DbContext(typeof(MvcMoviePocContext))]
-    partial class MvcMoviePocContextModelSnapshot : ModelSnapshot
+    [Migration("20251126072624_AddRatingAndTitleConstraints")]
+    partial class AddRatingAndTitleConstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

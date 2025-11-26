@@ -40,6 +40,10 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label>Discounted Price</label>
+                <input value="@Model.DiscountedPrice" class="form-control" readonly />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

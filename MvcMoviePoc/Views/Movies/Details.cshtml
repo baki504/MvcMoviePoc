@@ -21,6 +21,10 @@
         <dd class="col-sm-10">@Model.Rating</dd>
         <dt class="col-sm-2">Price</dt>
         <dd class = "col-sm-10">@Model.Price</dd>
+        <dt class="col-sm-2">Discounted Price</dt>
+        <dd class = "col-sm-10">@Model.DiscountedPrice</dd>
+        <dt class="col-sm-2">Savings</dt>
+        <dd class = "col-sm-10">@(Model.Price - Model.DiscountedPrice)</dd>
     </dl>
 </div>
 <div>

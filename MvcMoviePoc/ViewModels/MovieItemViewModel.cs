@@ -10,5 +10,6 @@ namespace MvcMoviePoc.ViewModels
         public string? Genre { get; init; }
         public string Rating { get; init; } = string.Empty;
         public decimal Price { get; init; }
+        public decimal DiscountedPrice { get; init; }
     }
 }

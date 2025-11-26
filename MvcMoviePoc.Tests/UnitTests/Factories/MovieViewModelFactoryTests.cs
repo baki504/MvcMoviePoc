@@ -32,6 +32,7 @@ namespace MvcMoviePoc.Tests.UnitTests.Factories
             Assert.Equal(movie.Genre, vm.Genre);
             Assert.Equal(movie.Rating, vm.Rating);
             Assert.Equal(movie.Price, vm.Price);
+            Assert.Equal(12.34M, vm.DiscountedPrice); // no discounts for non Family/PG
         }
 
         [Fact]
@@ -62,6 +63,7 @@ namespace MvcMoviePoc.Tests.UnitTests.Factories
                     Assert.Equal("Comedy", item.Genre);
                     Assert.Equal("G", item.Rating);
                     Assert.Equal(1.23M, item.Price);
+                    Assert.Equal(1.23M, item.DiscountedPrice);
                 },
                 item =>
                 {
@@ -71,6 +73,7 @@ namespace MvcMoviePoc.Tests.UnitTests.Factories
                     Assert.Equal("Action", item.Genre);
                     Assert.Equal("PG", item.Rating);
                     Assert.Equal(4.56M, item.Price);
+                    Assert.Equal(4.33M, item.DiscountedPrice);
                 }
             );
         }

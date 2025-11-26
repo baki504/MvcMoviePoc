@@ -1,5 +1,5 @@
-﻿@using MvcMoviePoc.Models
-@model Movie
+﻿@using MvcMoviePoc.ViewModels
+@model MovieItemViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,36 +12,16 @@
     <h4>Movie</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+        <dt class = "col-sm-2">Title</dt>
+        <dd class = "col-sm-10">@Model.Title</dd>
+        <dt class="col-sm-2">Release Date</dt>
+        <dd class = "col-sm-10">@Model.ReleaseDate</dd>
+        <dt class = "col-sm-2">Genre</dt>
+        <dd class = "col-sm-10">@Model.Genre</dd>
+        <dt class="col-sm-2">Rating</dt>
+        <dd class="col-sm-10">@Model.Rating</dd>
+        <dt class="col-sm-2">Price</dt>
+        <dd class = "col-sm-10">@Model.Price</dd>
     </dl>
     
     <form asp-action="Delete">

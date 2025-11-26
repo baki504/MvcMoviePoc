@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MvcMoviePoc.Models;
+using MvcMoviePoc.ViewModels;
 
 namespace MvcMoviePoc.Controllers
 {

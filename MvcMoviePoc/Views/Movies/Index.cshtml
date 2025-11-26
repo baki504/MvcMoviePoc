@@ -1,5 +1,5 @@
-﻿@using MvcMoviePoc.Models
-@model MovieGenreViewModel
+﻿@using MvcMoviePoc.ViewModels
+@model MovieListViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,12 +12,8 @@
 </p>
 <form asp-controller="Movies" asp-action="Index" method="get">
     <p>
-
-        <select asp-for="MovieGenre" asp-items="Model.Genres">
-            <option value="">All</option>
-        </select>
-
-        <label>Title: <input type="text" asp-for="SearchString" /></label>
+        <label>Genre: <input type="text" name="movieGenre" value="@Model.GenreFilter" /></label>
+        <label>Title: <input type="text" name="searchString" value="@Model.TitleFilter" /></label>
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -25,43 +21,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies![0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies![0].ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies![0].Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies![0].Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies![0].Price)
-            </th>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Price</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Movies!)
+        @foreach (var item in Model.Items)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
+                <td>@item.Title</td>
+                <td>@item.ReleaseDate.ToShortDateString()</td>
+                <td>@item.Genre</td>
+                <td>@item.Rating</td>
+                <td>@item.Price</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

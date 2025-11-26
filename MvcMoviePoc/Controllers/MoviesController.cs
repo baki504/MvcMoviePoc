@@ -3,46 +3,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMoviePoc.Data;
 using MvcMoviePoc.Models;
+using MvcMoviePoc.Services;
+using MvcMoviePoc.ViewModels;
 
 namespace MvcMoviePoc.Controllers
 {
-    public class MoviesController(MvcMoviePocContext context) : Controller
+    public class MoviesController(MovieService service) : Controller
     {
-        private readonly MvcMoviePocContext _context = context;
+        private readonly MovieService _service = service;
 
-        // GET: Movies
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            if (_context.Movie == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
-            }
-
-            // Use LINQ to get list of genres.
-            IQueryable<string> genreQuery = from m in _context.Movie
-                                            orderby m.Genre
-                                            select m.Genre;
-            var movies = from m in _context.Movie
-                         select m;
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.Title!.ToUpper().Contains(searchString.ToUpper()));
-            }
-
-            if (!string.IsNullOrEmpty(movieGenre))
-            {
-                movies = movies.Where(x => x.Genre == movieGenre);
-            }
-
-            var movieGenreVM = new MovieGenreViewModel
-            {
-                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Movies = await movies.ToListAsync()
-            };
-
-            return View(movieGenreVM);
+            MovieListViewModel vm = await _service.GetListAsync(searchString, movieGenre, null);
+            return View(vm);
         }
 
         [HttpPost]
@@ -64,36 +38,34 @@ namespace MvcMoviePoc.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            MovieItemViewModel? vm = await _service.GetAsync(id.Value);
+            if (vm == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(vm);
         }
 
         // GET: Movies/Create
         public IActionResult Create()
         {
-            return View();
+            MovieItemViewModel vm = new MovieItemViewModel();
+            return View(vm);
         }
 
         // POST: Movies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create(MovieItemViewModel vm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(vm);
             }
-            return View(movie);
+
+            int id = await _service.CreateAsync(vm);
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         // GET: Movies/Edit/5
@@ -109,47 +81,35 @@ namespace MvcMoviePoc.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie == null)
+            MovieItemViewModel? vm = await _service.GetAsync(id.Value);
+            if (vm == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(vm);
         }
 
         // POST: Movies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Rating,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, MovieItemViewModel vm)
         {
-            if (id != movie.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(movie);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MovieExists(movie.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return View(vm);
             }
-            return View(movie);
+
+            bool updated = await _service.UpdateAsync(vm);
+            if (!updated)
+            {
+                return NotFound();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Movies/Delete/5
@@ -165,15 +125,13 @@ namespace MvcMoviePoc.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            MovieItemViewModel? vm = await _service.GetAsync(id.Value);
+            if (vm == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(vm);
         }
 
         // POST: Movies/Delete/5
@@ -186,19 +144,12 @@ namespace MvcMoviePoc.Controllers
                 return BadRequest(ModelState);
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie != null)
+            bool deleted = await _service.DeleteAsync(id);
+            if (!deleted)
             {
-                _context.Movie.Remove(movie);
+                return NotFound();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool MovieExists(int id)
-        {
-            return _context.Movie.Any(e => e.Id == id);
         }
     }
 }

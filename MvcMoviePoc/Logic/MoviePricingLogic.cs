@@ -1,4 +1,3 @@
-using System;
 using MvcMoviePoc.Models;
 
 namespace MvcMoviePoc.Logic

@@ -1,7 +1,5 @@
-using System;
 using MvcMoviePoc.Logic;
 using MvcMoviePoc.Models;
-using Xunit;
 
 namespace MvcMoviePoc.Tests.UnitTests.Logic
 {

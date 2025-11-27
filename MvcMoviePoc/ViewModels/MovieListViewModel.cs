@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace MvcMoviePoc.ViewModels
 {
     public class MovieListViewModel

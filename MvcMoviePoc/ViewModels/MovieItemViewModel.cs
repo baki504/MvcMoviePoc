@@ -1,5 +1,3 @@
-using System;
-
 namespace MvcMoviePoc.ViewModels
 {
     public class MovieItemViewModel

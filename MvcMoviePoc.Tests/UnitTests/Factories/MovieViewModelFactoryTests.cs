@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using MvcMoviePoc.Factories;
 using MvcMoviePoc.Models;
 using MvcMoviePoc.ViewModels;
-using Xunit;
 
 namespace MvcMoviePoc.Tests.UnitTests.Factories
 {
@@ -59,7 +56,7 @@ namespace MvcMoviePoc.Tests.UnitTests.Factories
                 {
                     Assert.Equal(1, item.Id);
                     Assert.Equal("A", item.Title);
-                    Assert.Equal(new DateTime(2001,1,1), item.ReleaseDate);
+                    Assert.Equal(new DateTime(2001, 1, 1), item.ReleaseDate);
                     Assert.Equal("Comedy", item.Genre);
                     Assert.Equal("G", item.Rating);
                     Assert.Equal(1.23M, item.Price);
@@ -69,7 +66,7 @@ namespace MvcMoviePoc.Tests.UnitTests.Factories
                 {
                     Assert.Equal(2, item.Id);
                     Assert.Equal("B", item.Title);
-                    Assert.Equal(new DateTime(2002,2,2), item.ReleaseDate);
+                    Assert.Equal(new DateTime(2002, 2, 2), item.ReleaseDate);
                     Assert.Equal("Action", item.Genre);
                     Assert.Equal("PG", item.Rating);
                     Assert.Equal(4.56M, item.Price);

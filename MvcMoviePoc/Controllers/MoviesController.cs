@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MvcMoviePoc.Data;
-using MvcMoviePoc.Models;
 using MvcMoviePoc.Services;
 using MvcMoviePoc.ViewModels;
 

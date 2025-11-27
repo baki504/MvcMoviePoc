@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using MvcMoviePoc.Data;
 using MvcMoviePoc.Factories;
+using MvcMoviePoc.Models;
 using MvcMoviePoc.Repositories;
 using MvcMoviePoc.Services;
-using MvcMoviePoc.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MvcMoviePocContext>(options =>

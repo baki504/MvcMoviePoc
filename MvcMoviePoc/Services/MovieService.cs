@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MvcMoviePoc.Factories;
 using MvcMoviePoc.Models;
 using MvcMoviePoc.Repositories;
